@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LogRecords 
+    Log="{{ name }}" 
+    LogDescription="{{ description }}" 
+    LogPath="" 
+    Unit="{{ unit }}" Signal="" 
+    Locale="en-US" 
+    Max="{{ metadata.max }}" 
+    Min="{{ metadata.min }}" 
+    Average="{{ metadata.average }}" 
+    Count="{{ log_data.length }}" 
+    StartTime="{{ start_date }}" 
+    EndTime="{{ end_date }}" 
+    Description=""
+  >
+  {% for data in log_data %}
+    <TrendLogValueRecord Timestamp="{{ data.time }}" Value="{{ data.value }}" Events="" Comment="added with application" User="" />
+  {% endfor %}
+</LogRecords>
