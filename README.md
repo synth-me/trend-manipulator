@@ -74,5 +74,5 @@ e entao navegue ate o XML que foi gerado, na pasta "outputs".
 > o nome ira depender do nome escolhido pelo usuario 
 
 O resultado deve ser algo parecido como:
-![alt text](./tutorial/resultar-deletar.png)
+![alt text](./tutorial/resultado-deletar.png)
 > valores escolhidos foram excluidos
