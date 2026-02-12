@@ -76,3 +76,60 @@ e entao navegue ate o XML que foi gerado, na pasta "outputs".
 O resultado deve ser algo parecido como:
 ![alt text](./tutorial/resultado-deletar.png)
 > valores escolhidos foram excluidos
+
+
+### 2.2 Modificar dados 
+
+Assim como na situacao anterior, voce devera deletar os valores anteriores 
+para poder modificar os existentes. Portanto caso queira saber como adicionar os valores
+na trend, siga os passos anteriores relativos a isso (exportar, deletar e importar)
+
+Utilizando o terceiro botao "Modificar Trend Existente" o usuario pode ao inves de 
+deletar valores, modifica-los: 
+
+![alt text](./tutorial/modificar-trend.png)
+> Botao de modificacao de trend 
+
+Neste caso iremos modificar os valores de 12/02/2026 23:10:00 ate 12/02/2026 23:13:00 para 1001 
+
+![alt text](./tutorial/tela-modificacao.png)
+> modificacao 
+
+E entao basta clicar para gerar o novo arquivo. Apos isso importamos no EBO: 
+
+![alt text](./tutorial/trend-modificada.png)
+> trend apos a modificacao 
+
+### 2.3 Gerar uma trend de exemplo 
+
+Para gerar um trend e utilizar, por exemplo, para testar graficos e telas e possivel utilizar a primeira opcao do app: 
+
+![alt text](./tutorial/gerar-button.png)
+> botao para ir ate a tela de geracao de trend 
+
+Basta escolher o periodo, o passo (quantidade de pontos naquele periodo) e o tipo de distribuicao (linear, cosseno, quadrado etc ...). 
+
+![alt text](./tutorial/tela-geracao.png)
+> exemplo de geracao de trend 
+
+E entao utilizar o XML de saida para alguma trend que esteja em branco no EBO 
+
+### 2.4 Gerar a partir de excel 
+
+Parar gerar um XML a partir de um excel o usuario devera clicar no segundo botao "Converter Excel XML". 
+
+![alt text](./tutorial/converstion-button.png)
+> botao que dever ser clicado 
+
+Apos isso basta selecionar o arquivo excel desejado. O arquivo em questao deve ter a seguinte estrutura para funcionar: 
+
+![alt text](./tutorial/excel-example.png)
+> exemplo de arquivo
+
+![alt text](./tutorial/tela-conversion.png)
+> selecao do arquivo 
+
+Este arquivo, por exemplo ira gerar: 
+
+![alt text](./tutorial/excel-to-xml.png)
+> trend gerada no EBO
