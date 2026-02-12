@@ -1,31 +1,47 @@
-# Tutorial de uso do aplicativo 
+# Ferramenta de Manipulação de Trends em XML
 
-## Motivacao 
+## 1. Motivação
 
-Este aplicativo tem como objetivo facilitar a modificacao das trends que ja existem dentro de algum projeto. 
-Possibilidades de aplicaco: 
+Este aplicativo foi desenvolvido para facilitar a manipulação de arquivos de trend em formato XML utilizados no EBO (EcoStruxure Building Operation).
 
-1. manutencao de equipamento que distorce as medicoes em um dado periodo de tempo
-2. adicao de offset que distorceu em um momento especifico 
-3. equiapmento teve falha e foram registrados diversos valores incongruentes 
+Em ambientes reais, é comum que medições históricas precisem ser ajustadas devido a falhas operacionais ou inconsistências. A ferramenta permite editar, excluir, gerar ou converter dados de trend de forma estruturada e segura, evitando edições manuais no XML.
 
-## Por onde comecar ? 
+### Principais cenários de aplicação
 
-## 1. Como extrair uma trend em XML 
+1. Manutenção de equipamento que distorceu medições durante determinado período.
+2. Aplicação de offset incorreto em um intervalo específico.
+3. Falha de sensor que gerou valores incongruentes.
+4. Importação de dados históricos a partir de planilhas Excel.
+5. Geração de trends sintéticas para testes de telas, gráficos e validação de lógica.
 
-A base deste aplicativo esta nos arquivos em XML extraido das trends. Para extrair esses valores basta navegar 
-na trend desejada, adicionar a mesma quantidade de valores totais da trend (Ex: se o tamanho da trend esta em 8 mil, coloque a visualizacao em 8 mil valores para que todos possam ser extraidos). 
+---
 
-![alt text](./tutorial/size.png)
-> aqui podemos ver uma trend com tamanho 5 mil 
+# 2. Por Onde Começar?
 
-![alt text](./tutorial/view.png)
-> basta entao ir ate a visualizacao indicada na imagem 
+## 2.1 Como Extrair uma Trend em XML
 
-![alt text](./tutorial/export.png)
-> entao, basta visualizar toda a trend e exportar como XML
+A base deste aplicativo são arquivos XML exportados diretamente das trends do EBO.
 
-O formato do arquivo de saida deve ser algo parecido com: 
+Para extrair corretamente todos os valores:
+
+1. Navegue até a trend desejada.
+2. Ajuste a visualização para conter **todos os registros existentes**.
+   - Exemplo: se a trend possui 5.000 registros, configure a visualização para 5.000.
+
+![Trend Size](./tutorial/size.png)  
+> Exemplo de trend com 5 mil registros.
+
+3. Ajuste o campo de visualização conforme indicado.
+
+![Trend View](./tutorial/view.png)
+
+4. Visualize todos os dados e exporte como XML.
+
+![Export XML](./tutorial/export.png)
+
+---
+
+### Exemplo de Estrutura XML
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -34,102 +50,230 @@ O formato do arquivo de saida deve ser algo parecido com:
 </LogRecords>
 ```
 
-## 2. Possibilidade de acoes 
+A aplicação preserva os metadados originais e recalcula automaticamente:
 
-Utilizaremos a seguinte trend como base dos seguintes tutoriais:
+- Valor máximo
+- Valor mínimo
+- Média
+- Data inicial
+- Data final
 
-![alt text](./tutorial/example.png)
+---
 
-### 2.1 Deletar dados 
+# 3. Funcionalidades do Aplicativo
 
-Suponha que queremos deletar os valores de: 
+Utilizaremos a seguinte trend como exemplo:
 
-12/02/2026 23:10:00 ate 12/02/2026 23:13:00
+![Trend Exemplo](./tutorial/example.png)
 
-Primeiro basta acessar o botao "deletar intervalo de dados" 
+---
 
-![alt text](./tutorial/delete_button.png)
+# 3.1 Deletar Intervalo de Dados
 
-Apos isso, clique no botao para procurar o XML que foi extraido da sua trend e escolha o periodo de inicio e de fim da exclusao dos dados: 
+Permite remover todos os registros dentro de um intervalo específico de tempo.
 
-![alt text](./tutorial/usage-delete.png)
+### Exemplo
 
-Caso queira, tambem e possivel mudar o nome do arquivo de saida. 
-Basta entao clicar em "Remover Dados". Isso ira gerar um novo arquivo 
-que e uma copia do anterior sem as informacoes escolhidas. 
+Remover dados de:
 
-Para retornar para o EBO voce deve entao ir ate a trend e
-exclui-la para que os valores nao fiquem duplicados: 
+```
+12/02/2026 23:10:00 até 12/02/2026 23:13:00
+```
 
-![alt text](./tutorial/clean-trend.png)
+### Passo 1
 
-e entao para importar os novos valores na trend basta seguir o seguinte
+Clique em:
 
-![alt text](./tutorial/import-log.png)
-> Utilize o botao "import log data" 
+![Botão Deletar](./tutorial/delete_button.png)
 
-e entao navegue ate o XML que foi gerado, na pasta "outputs". 
+### Passo 2
 
-![alt text](./tutorial/escolha-arquivo.png)
-> o nome ira depender do nome escolhido pelo usuario 
+Selecione o XML exportado e defina o intervalo:
 
-O resultado deve ser algo parecido como:
-![alt text](./tutorial/resultado-deletar.png)
-> valores escolhidos foram excluidos
+![Tela Deleção](./tutorial/usage-delete.png)
+
+Você também pode alterar o nome do arquivo de saída.
+
+Clique em **Remover Dados**.
+
+O sistema irá:
+
+- Carregar o XML
+- Converter timestamps para datetime
+- Remover registros dentro do intervalo (inclusive)
+- Recalcular estatísticas
+- Gerar um novo XML
+
+---
+
+### Importando novamente no EBO
+
+Antes de importar o novo arquivo:
+
+1. Exclua a trend original para evitar duplicidade.
+
+![Limpar Trend](./tutorial/clean-trend.png)
+
+2. Utilize **Import Log Data**.
+
+![Import Log](./tutorial/import-log.png)
+
+3. Selecione o XML gerado na pasta `output/results`.
+
+![Escolher Arquivo](./tutorial/escolha-arquivo.png)
+
+Resultado esperado:
+
+![Resultado Deletar](./tutorial/resultado-deletar.png)
+
+---
+
+# 3.2 Modificar Trend Existente
+
+Permite substituir valores dentro de um intervalo por:
+
+- Um valor constante
+- Uma função matemática
+
+### Modos disponíveis
+
+- valor_constante
+- linear
+- linear_double
+- sin
+- cos
+- square
+- sqrt
+- log
+
+### Acessando a funcionalidade
+
+![Botão Modificar](./tutorial/modificar-trend.png)
+
+### Exemplo
+
+Modificar o intervalo:
+
+```
+12/02/2026 23:10:00 até 12/02/2026 23:13:00
+```
+
+Para valor:
+
+```
+1001
+```
+
+![Tela Modificação](./tutorial/tela-modificacao.png)
+
+Clique em **Aplicar e Salvar**.
+
+Internamente, o sistema:
+
+- Gera novos valores no intervalo
+- Substitui registros existentes
+- Reordena cronologicamente
+- Recalcula estatísticas
+- Gera novo XML
+
+Resultado após importação:
+
+![Trend Modificada](./tutorial/trend-modificada.png)
+
+---
+
+# 3.3 Gerar Novo Trend XML
+
+Permite criar uma trend sintética para testes.
+
+Acesse:
+
+![Botão Gerar](./tutorial/gerar-button.png)
+
+### Parâmetros disponíveis
+
+- Data inicial
+- Data final
+- Frequência:
+  - segundo
+  - minuto
+  - hora
+  - dia
+- Tipo de cálculo:
+  - linear
+  - linear_double
+  - sin
+  - cos
+  - square
+  - sqrt
+  - log
+
+![Tela Geração](./tutorial/tela-geracao.png)
+
+O sistema:
+
+- Gera sequência de timestamps
+- Aplica função matemática
+- Arredonda valores (5 casas decimais)
+- Calcula máximo, mínimo e média
+- Gera XML compatível com EBO
+
+O arquivo pode ser importado em uma trend vazia.
+
+---
+
+# 3.4 Converter Excel para XML
+
+Permite gerar um XML a partir de uma planilha Excel.
+
+Acesse:
+
+![Botão Conversão](./tutorial/converstion-button.png)
+
+### Estrutura obrigatória do Excel
+
+A planilha deve conter exatamente:
+
+```
+timestamp | value
+```
+
+Exemplo:
+
+![Excel Exemplo](./tutorial/excel-example.png)
+
+Regras obrigatórias:
+
+- Colunas exatamente: `timestamp` e `value`
+- Sem células vazias
+- Valores numéricos na coluna `value`
+- Timestamps em ordem crescente
+- Datas válidas
+
+Selecione o arquivo:
+
+![Tela Conversão](./tutorial/tela-conversion.png)
+
+O sistema irá:
+
+- Validar colunas
+- Validar ordenação
+- Validar tipo numérico
+- Converter timestamps
+- Calcular estatísticas
+- Gerar XML
+
+Resultado no EBO:
+
+![Excel para XML](./tutorial/excel-to-xml.png)
+
+---
+
+# 4. Observações Importantes
+
+- O arquivo original nunca é sobrescrito.
+- Sempre mantenha backup da trend original.
+- Exclua a trend antes de reimportar para evitar duplicidade.
+- Estatísticas são sempre recalculadas com base nos dados finais.
 
 
-### 2.2 Modificar dados 
-
-Assim como na situacao anterior, voce devera deletar os valores anteriores 
-para poder modificar os existentes. Portanto caso queira saber como adicionar os valores
-na trend, siga os passos anteriores relativos a isso (exportar, deletar e importar)
-
-Utilizando o terceiro botao "Modificar Trend Existente" o usuario pode ao inves de 
-deletar valores, modifica-los: 
-
-![alt text](./tutorial/modificar-trend.png)
-> Botao de modificacao de trend 
-
-Neste caso iremos modificar os valores de 12/02/2026 23:10:00 ate 12/02/2026 23:13:00 para 1001 
-
-![alt text](./tutorial/tela-modificacao.png)
-> modificacao 
-
-E entao basta clicar para gerar o novo arquivo. Apos isso importamos no EBO: 
-
-![alt text](./tutorial/trend-modificada.png)
-> trend apos a modificacao 
-
-### 2.3 Gerar uma trend de exemplo 
-
-Para gerar um trend e utilizar, por exemplo, para testar graficos e telas e possivel utilizar a primeira opcao do app: 
-
-![alt text](./tutorial/gerar-button.png)
-> botao para ir ate a tela de geracao de trend 
-
-Basta escolher o periodo, o passo (quantidade de pontos naquele periodo) e o tipo de distribuicao (linear, cosseno, quadrado etc ...). 
-
-![alt text](./tutorial/tela-geracao.png)
-> exemplo de geracao de trend 
-
-E entao utilizar o XML de saida para alguma trend que esteja em branco no EBO 
-
-### 2.4 Gerar a partir de excel 
-
-Parar gerar um XML a partir de um excel o usuario devera clicar no segundo botao "Converter Excel XML". 
-
-![alt text](./tutorial/converstion-button.png)
-> botao que dever ser clicado 
-
-Apos isso basta selecionar o arquivo excel desejado. O arquivo em questao deve ter a seguinte estrutura para funcionar: 
-
-![alt text](./tutorial/excel-example.png)
-> exemplo de arquivo
-
-![alt text](./tutorial/tela-conversion.png)
-> selecao do arquivo 
-
-Este arquivo, por exemplo ira gerar: 
-
-![alt text](./tutorial/excel-to-xml.png)
-> trend gerada no EBO
