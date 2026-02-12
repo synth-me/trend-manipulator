@@ -28,16 +28,16 @@ Para extrair corretamente todos os valores:
 2. Ajuste a visualização para conter **todos os registros existentes**.
    - Exemplo: se a trend possui 5.000 registros, configure a visualização para 5.000.
 
-![Trend Size](./tutorial/size.png)  
+<img src="./tutorial/size.png" width="550">  
 > Exemplo de trend com 5 mil registros.
 
 3. Ajuste o campo de visualização conforme indicado.
 
-![Trend View](./tutorial/view.png)
+<img src="./tutorial/view.png" width="550">
 
 4. Visualize todos os dados e exporte como XML.
 
-![Export XML](./tutorial/export.png)
+<img src="./tutorial/export.png" width="550">
 
 ---
 
@@ -64,7 +64,7 @@ A aplicação preserva os metadados originais e recalcula automaticamente:
 
 Utilizaremos a seguinte trend como exemplo:
 
-![Trend Exemplo](./tutorial/example.png)
+<img src="./tutorial/example.png" width="550">
 
 ---
 
@@ -84,13 +84,13 @@ Remover dados de:
 
 Clique em:
 
-![Botão Deletar](./tutorial/delete_button.png)
+<img src="./tutorial/delete_button.png" width="550">
 
 ### Passo 2
 
 Selecione o XML exportado e defina o intervalo:
 
-![Tela Deleção](./tutorial/usage-delete.png)
+<img src="./tutorial/usage-delete.png" width="550">
 
 Você também pode alterar o nome do arquivo de saída.
 
@@ -112,19 +112,19 @@ Antes de importar o novo arquivo:
 
 1. Exclua a trend original para evitar duplicidade.
 
-![Limpar Trend](./tutorial/clean-trend.png)
+<img src="./tutorial/clean-trend.png" width="550">
 
 2. Utilize **Import Log Data**.
 
-![Import Log](./tutorial/import-log.png)
+<img src="./tutorial/import-log.png" width="550">
 
 3. Selecione o XML gerado na pasta `output/results`.
 
-![Escolher Arquivo](./tutorial/escolha-arquivo.png)
+<img src="./tutorial/escolha-arquivo.png" width="550">
 
 Resultado esperado:
 
-![Resultado Deletar](./tutorial/resultado-deletar.png)
+<img src="./tutorial/resultado-deletar.png" width="550">
 
 ---
 
@@ -148,7 +148,7 @@ Permite substituir valores dentro de um intervalo por:
 
 ### Acessando a funcionalidade
 
-![Botão Modificar](./tutorial/modificar-trend.png)
+<img src="./tutorial/modificar-trend.png" width="550">
 
 ### Exemplo
 
@@ -164,7 +164,7 @@ Para valor:
 1001
 ```
 
-![Tela Modificação](./tutorial/tela-modificacao.png)
+<img src="./tutorial/tela-modificacao.png" width="550">
 
 Clique em **Aplicar e Salvar**.
 
@@ -178,7 +178,7 @@ Internamente, o sistema:
 
 Resultado após importação:
 
-![Trend Modificada](./tutorial/trend-modificada.png)
+<img src="./tutorial/trend-modificada.png" width="550">
 
 ---
 
@@ -188,7 +188,7 @@ Permite criar uma trend sintética para testes.
 
 Acesse:
 
-![Botão Gerar](./tutorial/gerar-button.png)
+<img src="./tutorial/gerar-button.png" width="550">
 
 ### Parâmetros disponíveis
 
@@ -208,7 +208,7 @@ Acesse:
   - sqrt
   - log
 
-![Tela Geração](./tutorial/tela-geracao.png)
+<img src="./tutorial/tela-geracao.png" width="550">
 
 O sistema:
 
@@ -228,7 +228,7 @@ Permite gerar um XML a partir de uma planilha Excel.
 
 Acesse:
 
-![Botão Conversão](./tutorial/converstion-button.png)
+<img src="./tutorial/converstion-button.png" width="550">
 
 ### Estrutura obrigatória do Excel
 
@@ -240,7 +240,7 @@ timestamp | value
 
 Exemplo:
 
-![Excel Exemplo](./tutorial/excel-example.png)
+<img src="./tutorial/excel-example.png" width="550">
 
 Regras obrigatórias:
 
@@ -252,7 +252,7 @@ Regras obrigatórias:
 
 Selecione o arquivo:
 
-![Tela Conversão](./tutorial/tela-conversion.png)
+<img src="./tutorial/tela-conversion.png" width="550">
 
 O sistema irá:
 
@@ -265,7 +265,7 @@ O sistema irá:
 
 Resultado no EBO:
 
-![Excel para XML](./tutorial/excel-to-xml.png)
+<img src="./tutorial/excel-to-xml.png" width="550">
 
 ---
 
@@ -275,5 +275,4 @@ Resultado no EBO:
 - Sempre mantenha backup da trend original.
 - Exclua a trend antes de reimportar para evitar duplicidade.
 - Estatísticas são sempre recalculadas com base nos dados finais.
-
 
